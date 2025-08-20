@@ -9,3 +9,8 @@ export type Result = {
     name: string;
     img: string;
 };
+
+export type FilterInputs = {
+    search: string;
+    favorites: string;
+};

@@ -6,7 +6,13 @@ export async function getRandomPokes(id: string) {
         const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
         const result = Pokemon.safeParse(data);
         if (result.success) {
-            return result.data;
+            const restructure = {
+                id,
+                name: result.data?.name,
+                img: result.data?.sprites.other["official-artwork"].front_default,
+                favorite: false,
+            };
+            return restructure;
         }
     } catch (error) {
         console.log(error);
@@ -24,6 +30,7 @@ export async function getGridPokemon(page: number, limit: number) {
                 id,
                 name: item.name,
                 img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+                favorite: false,
             };
         });
 

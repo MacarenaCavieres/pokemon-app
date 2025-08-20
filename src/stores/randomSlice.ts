@@ -1,9 +1,9 @@
 import type { StateCreator } from "zustand";
-import type { PokemonDetail } from "../types";
+import type { Result } from "../types";
 import { getRandomPokes } from "../services/PokesService";
 
 export type RandomPokemonsType = {
-    randomPokes: PokemonDetail[];
+    randomPokes: Result[];
     initialized: boolean;
     fetchRandomPokemon: (id: string) => Promise<void>;
     fetchInitialPokemons: () => void;

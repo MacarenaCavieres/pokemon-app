@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useAppStore } from "../stores/useAppStore";
-import PokemonCard from "../components/PokemonCard";
 import Loader from "../components/Loader";
+import PokemonCard from "../components/PokemonCard";
 
 function IndexPage() {
     const fetchInitialPokemons = useAppStore((state) => state.fetchInitialPokemons);

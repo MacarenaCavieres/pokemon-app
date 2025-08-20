@@ -16,7 +16,6 @@ function Pagination({ page, totalPages, onPageChange }: Props) {
         const start = Math.max(1, page - 2);
         const end = Math.min(totalPages, page + 2);
 
-        console.log(end);
         for (let i = start; i <= end; i++) {
             pages.push(i);
         }
@@ -32,7 +31,7 @@ function Pagination({ page, totalPages, onPageChange }: Props) {
     const pages = getPages();
 
     return (
-        <div className="flex items-center gap-2 mt-5">
+        <div className="flex justify-center items-center gap-2 mt-16">
             <button
                 className="px-3 py-1 rounded bg-red-400 text-yellow-100 font-bold disabled:bg-gray-400 disabled:cursor-default cursor-pointer"
                 onClick={() => onPageChange(page - 1)}
