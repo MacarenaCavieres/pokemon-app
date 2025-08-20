@@ -16,27 +16,34 @@ function Header() {
         <header className="relative h-96 flex justify-center items-center text-white">
             <div className="absolute inset-0 bg-center bg-cover blur-sm bg-[url('./bg-header.jpg')]"></div>
             <div className="absolute inset-0 bg-black/40"></div>
+            <nav className="absolute top-14 right-6 z-20">
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        isActive ? "text-yellow-300 text-xl mx-3" : "hover:text-yellow-300 mx-3 text-xl"
+                    }
+                >
+                    Home
+                </NavLink>
+                <NavLink
+                    to="/pokegrid"
+                    className={({ isActive }) =>
+                        isActive ? "text-yellow-300 text-xl mx-3" : "hover:text-yellow-300 mx-3 text-xl"
+                    }
+                >
+                    Pokemons
+                </NavLink>
+                <NavLink
+                    to="/pokedex"
+                    className={({ isActive }) =>
+                        isActive ? "text-yellow-300 text-xl mx-3" : "hover:text-yellow-300 mx-3 text-xl"
+                    }
+                >
+                    Pokedex
+                </NavLink>
+            </nav>
+
             <div className="relative z-10 text-center w-full">
-                <div className="absolute top-20 right-6">
-                    <nav>
-                        <NavLink
-                            to="/"
-                            className={({ isActive }) =>
-                                isActive
-                                    ? "text-yellow-300 text-xl mx-3"
-                                    : "hover:text-yellow-300 mx-3 text-xl"
-                            }
-                        >
-                            Home
-                        </NavLink>
-                        <NavLink to="/pokegrid" className={({ isActive }) => (isActive ? "underline" : "")}>
-                            Pokemons
-                        </NavLink>
-                        <NavLink to="/pokedex" className={({ isActive }) => (isActive ? "underline" : "")}>
-                            Pokedex
-                        </NavLink>
-                    </nav>
-                </div>
                 <h1 className="text-4xl">{titlePage}</h1>
                 <button
                     type="button"

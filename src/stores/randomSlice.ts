@@ -1,6 +1,6 @@
 import type { StateCreator } from "zustand";
 import type { PokemonDetail } from "../types";
-import { randomPokesService } from "../services/PokesService";
+import { getRandomPokes } from "../services/PokesService";
 
 export type RandomPokemonsType = {
     randomPokes: PokemonDetail[];
@@ -13,7 +13,7 @@ export const createRandomPokemonSlice: StateCreator<RandomPokemonsType> = (set, 
     randomPokes: [],
     initialized: false,
     fetchRandomPokemon: async (id) => {
-        const random = await randomPokesService(id);
+        const random = await getRandomPokes(id);
         if (!random) return;
         set((state) => ({
             randomPokes: [...state.randomPokes, random],

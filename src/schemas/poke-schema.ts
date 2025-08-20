@@ -20,3 +20,15 @@ export const Pokemon = z.object({
     weight: z.number(),
     height: z.number(),
 });
+
+export const PokemonGrid = z.object({
+    count: z.number(),
+    next: z.url().nullable(),
+    previous: z.url().nullable(),
+    results: z.array(
+        z.object({
+            name: z.string(),
+            url: z.url(),
+        })
+    ),
+});
