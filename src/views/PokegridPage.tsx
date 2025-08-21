@@ -5,9 +5,11 @@ import PokemonCard from "../components/PokemonCard";
 import Pagination from "../components/Pagination";
 import Filters from "../components/Filters";
 import type { FilterInputs } from "../types";
+import { useLocation } from "react-router-dom";
 
 function PokegridPage() {
-    const [page, setPage] = useState(0);
+    const location = useLocation();
+    const [page, setPage] = useState(location.state?.page ?? 0);
     const [isFiltering, setIsFiltering] = useState(false);
     const fetchPokemonGrid = useAppStore((state) => state.fetchPokemonGrid);
     const pokemonGrid = useAppStore((state) => state.pokemonGroup);
@@ -56,7 +58,7 @@ function PokegridPage() {
             ) : (
                 <div className=" max-w-4xl flex flex-wrap justify-center gap-10">
                     {pokemonsFiltered.map((item) => (
-                        <PokemonCard key={item.id} pokemon={item} />
+                        <PokemonCard key={item.id} pokemon={item} currentPage={page} />
                     ))}
                 </div>
             )}

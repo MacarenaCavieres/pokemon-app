@@ -8,8 +8,9 @@ import { Link, useLocation } from "react-router-dom";
 
 type Props = {
     pokemon: Result;
+    currentPage?: number;
 };
-function PokemonCard({ pokemon }: Props) {
+function PokemonCard({ pokemon, currentPage }: Props) {
     const handleFavorites = useAppStore((state) => state.handleFavorites);
     const favoritesPokemons = useAppStore((state) => state.favoritesPokemons);
     const fetchRandomPokemon = useAppStore((state) => state.fetchRandomPokemon);
@@ -58,7 +59,10 @@ function PokemonCard({ pokemon }: Props) {
                     )}
                 </span>
 
-                <Link to={`/pokedex/${pokemon.id}`} state={{ from: location.pathname }}>
+                <Link
+                    to={`/pokedex/${pokemon.id}`}
+                    state={{ from: { pathname: location.pathname, page: currentPage } }}
+                >
                     <div className="cursor-pointer text-center">
                         <div className="p-4 flex justify-center items-center">
                             <img

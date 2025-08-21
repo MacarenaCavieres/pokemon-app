@@ -24,7 +24,8 @@ function PokedexPage() {
 
     const handleBack = () => {
         if (location.state?.from) {
-            navigate(location.state.from);
+            const { pathname, page } = location.state.from;
+            navigate(pathname, { state: { page } });
         } else {
             navigate(-1);
         }
