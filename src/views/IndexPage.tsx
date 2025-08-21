@@ -14,10 +14,10 @@ function IndexPage() {
     return (
         <div className="container max-w-3xl mx-auto">
             <h2 className="text-4xl text-center mb-16 font-bold underline text-pink-900">
-                Tu equipo inicial
+                Your initial team
             </h2>
 
-            <section className="flex flex-wrap gap-5 justify-center items-center">
+            <section className="flex flex-wrap gap-5 justify-center items-center ">
                 {!isArrayFull ? (
                     <Loader />
                 ) : (

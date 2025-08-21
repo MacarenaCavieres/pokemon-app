@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 function Header() {
     const { pathname } = useLocation();
@@ -46,12 +46,14 @@ function Header() {
                     <div className="relative z-10 text-center w-full">
                         <h1 className="text-4xl">{titlePage}</h1>
                         {isHome && (
-                            <button
-                                type="button"
-                                className="mt-5 px-3 py-1 h-10 w-24 text-center rounded-lg uppercase bg-red-400 cursor-pointer font-bold text-yellow-100"
-                            >
-                                Start
-                            </button>
+                            <Link to="/pokegrid">
+                                <button
+                                    type="button"
+                                    className="mt-5 px-3 py-1 h-10 w-24 text-center rounded-lg uppercase bg-red-400 cursor-pointer font-bold text-yellow-100"
+                                >
+                                    Start
+                                </button>
+                            </Link>
                         )}
                     </div>
                 </header>

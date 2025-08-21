@@ -10,7 +10,6 @@ export async function getRandomPokes(id: string) {
                 id,
                 name: result.data?.name,
                 img: result.data?.sprites.other["official-artwork"].front_default,
-                favorite: false,
             };
             return restructure;
         }
@@ -30,7 +29,6 @@ export async function getGridPokemon(page: number, limit: number) {
                 id,
                 name: item.name,
                 img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
-                favorite: false,
             };
         });
 

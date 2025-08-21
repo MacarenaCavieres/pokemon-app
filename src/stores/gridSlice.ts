@@ -1,6 +1,7 @@
 import type { StateCreator } from "zustand";
 import type { FilterInputs, Result } from "../types";
 import { getGridPokemon } from "../services/PokesService";
+import { type RandomPokemonsType } from "./randomSlice";
 
 const handleStorage = () => {
     const storage = localStorage.getItem("favorites");
@@ -16,7 +17,7 @@ export type GridType = {
     handleFilters: (filters: FilterInputs) => void;
 };
 
-export const createGridSlice: StateCreator<GridType> = (set, get) => ({
+export const createGridSlice: StateCreator<GridType & RandomPokemonsType, [], [], GridType> = (set, get) => ({
     pokemonGroup: [],
     favoritesPokemons: handleStorage(),
     pokemonsFiltered: [],
@@ -36,7 +37,9 @@ export const createGridSlice: StateCreator<GridType> = (set, get) => ({
             set((state) => ({
                 favoritesPokemons: [
                     ...state.favoritesPokemons,
-                    state.pokemonGroup.filter((item) => item.id === id)[0],
+                    state.pokemonGroup.find((item) => item.id === id)
+                        ? state.pokemonGroup.filter((item) => item.id === id)[0]
+                        : get().randomPokes.filter((item) => item.id === id)[0],
                 ],
             }));
         }

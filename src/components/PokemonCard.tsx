@@ -4,7 +4,7 @@ import { StarIcon as StarSolid } from "@heroicons/react/24/solid";
 import { useAppStore } from "../stores/useAppStore";
 import { useMemo } from "react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 type Props = {
     pokemon: Result;
@@ -12,6 +12,11 @@ type Props = {
 function PokemonCard({ pokemon }: Props) {
     const handleFavorites = useAppStore((state) => state.handleFavorites);
     const favoritesPokemons = useAppStore((state) => state.favoritesPokemons);
+    const fetchRandomPokemon = useAppStore((state) => state.fetchRandomPokemon);
+    const { pathname } = useLocation();
+    const location = useLocation();
+
+    const isHome = useMemo(() => pathname === "/", [pathname]);
 
     const isFavorite = useMemo(
         () => favoritesPokemons.find((item) => item.id === pokemon.id),
@@ -27,30 +32,58 @@ function PokemonCard({ pokemon }: Props) {
         }
     };
 
+    const handleChangePokemon = () => {
+        const randomNum = (Math.random() * 1024 + 1).toFixed(0).toString();
+        fetchRandomPokemon(randomNum, pokemon.id);
+    };
+
     return (
-        <article className="border-2 border-black rounded-lg max-w-60">
-            <span className="flex justify-end">
-                {isFavorite ? (
-                    <button onClick={addOrRemoveFavorites}>
-                        <StarSolid className="h-8 w-8 text-yellow-400 cursor-pointer" />
-                    </button>
-                ) : (
-                    <button onClick={addOrRemoveFavorites}>
-                        <StarIcon className="h-8 w-8 text-yellow-400 cursor-pointer" />
+        <>
+            <article
+                className="
+            relative rounded-2xl overflow-hidden shadow-lg bg-gradient-to-tr from-[#FCD77F] to-[#2E99B0]
+            transform transition-all duration-300 hover:scale-105 hover:shadow-2xl
+            w-60 h-auto
+  "
+            >
+                <span className="absolute top-2 right-2 z-10">
+                    {isFavorite ? (
+                        <button onClick={addOrRemoveFavorites}>
+                            <StarSolid className="h-8 w-8 text-yellow-400 drop-shadow-md" />
+                        </button>
+                    ) : (
+                        <button onClick={addOrRemoveFavorites}>
+                            <StarIcon className="h-8 w-8 text-yellow-400 drop-shadow-md" />
+                        </button>
+                    )}
+                </span>
+
+                <Link to={`/pokedex/${pokemon.id}`} state={{ from: location.pathname }}>
+                    <div className="cursor-pointer text-center">
+                        <div className="p-4 flex justify-center items-center">
+                            <img
+                                className="w-48 h-48 object-contain transition-transform duration-300 hover:scale-110"
+                                src={pokemon.img}
+                                alt={`Pokemon ${pokemon.name}`}
+                            />
+                        </div>
+
+                        <div className="bg-[#FFF5CD]/70 backdrop-blur-sm px-4 py-2 rounded-t-2xl font-bold text-2xl">
+                            <p className="text-gray-700">#{pokemon.id}</p>
+                            <p className="text-pink-800 text-xl capitalize">{pokemon.name}</p>
+                        </div>
+                    </div>
+                </Link>
+                {isHome && (
+                    <button
+                        className="cursor-pointer flex bg-black/40 rounded-lg p-2 text-yellow-200 w-full justify-center"
+                        onClick={handleChangePokemon}
+                    >
+                        Change pokemon
                     </button>
                 )}
-            </span>
-
-            <Link to={`/pokedex/${pokemon.id}`}>
-                <div className="cursor-pointer mt-1 p-2">
-                    <img className="w-full" src={pokemon.img} alt={`Pokemon ${pokemon.name}`} />
-                    <div className="flex justify-between text-pink-800 py-3 px-4 font-bold text-2xl">
-                        <p>{pokemon.id}</p>
-                        <p>{pokemon.name}</p>
-                    </div>
-                </div>
-            </Link>
-        </article>
+            </article>
+        </>
     );
 }
 export default PokemonCard;

@@ -4,3 +4,18 @@
 .font-gummy {
     font-family: "Sour Gummy", sans-serif;
 }
+
+@keyframes spinIn {
+    0% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-spin-in {
+    animation: spinIn 0.8s ease-in-out forwards;
+}

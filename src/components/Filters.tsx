@@ -32,7 +32,10 @@ function Filters({ handleChange }: Props) {
     };
 
     return (
-        <form className="flex justify-center gap-10 my-10 text-lg" onChange={handleSubmit(handleFilters)}>
+        <form
+            className="flex justify-center flex-wrap gap-10 my-10 text-lg"
+            onChange={handleSubmit(handleFilters)}
+        >
             <div className="flex flex-col gap-2 min-w-1/3">
                 <label htmlFor="search">Search by name</label>
                 <input

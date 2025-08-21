@@ -14,3 +14,23 @@ export type FilterInputs = {
     search: string;
     favorites: string;
 };
+
+export type PokemonType =
+    | "fire"
+    | "water"
+    | "grass"
+    | "electric"
+    | "psychic"
+    | "ice"
+    | "dragon"
+    | "dark"
+    | "fairy"
+    | "fighting"
+    | "flying"
+    | "poison"
+    | "ground"
+    | "rock"
+    | "bug"
+    | "ghost"
+    | "steel"
+    | "normal";
