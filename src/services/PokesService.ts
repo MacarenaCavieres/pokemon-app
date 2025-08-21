@@ -41,3 +41,15 @@ export async function getGridPokemon(page: number, limit: number) {
         console.log(error);
     }
 }
+
+export async function getById(id: string) {
+    try {
+        const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        const result = Pokemon.safeParse(data);
+        if (result.success) {
+            return result.data;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

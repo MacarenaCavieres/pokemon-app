@@ -8,24 +8,44 @@ import type { FilterInputs } from "../types";
 
 function PokegridPage() {
     const [page, setPage] = useState(0);
+    const [isFiltering, setIsFiltering] = useState(false);
     const fetchPokemonGrid = useAppStore((state) => state.fetchPokemonGrid);
     const pokemonGrid = useAppStore((state) => state.pokemonGroup);
     const pokemons = useAppStore((state) => state.pokemonsFiltered);
     const handleFilters = useAppStore((state) => state.handleFilters);
+    const pageSize = 30;
+    const totalPages = Math.ceil(pokemons.length / pageSize);
 
-    const isArrayFull = useMemo(() => pokemonGrid.length === 30, [pokemonGrid]);
+    const isArrayFull = useMemo(() => pokemonGrid.length === pageSize, [pokemonGrid]);
+    const pokemonsFiltered = useMemo(() => {
+        if (isFiltering) {
+            const start = page * pageSize;
+            const end = start + pageSize;
+            return pokemons.slice(start, end);
+        } else {
+            return pokemons;
+        }
+    }, [isFiltering, page, pokemons]);
 
     const handleChange = (filters: FilterInputs) => {
         handleFilters(filters);
+        if (filters.search !== "" || filters.favorites === "favorites") {
+            setIsFiltering(true);
+            setPage(0);
+        } else {
+            setIsFiltering(false);
+        }
     };
 
     useEffect(() => {
-        fetchPokemonGrid(page, 30);
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    }, [page, fetchPokemonGrid]);
+        if (!isFiltering) {
+            fetchPokemonGrid(page, pageSize);
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        }
+    }, [isFiltering, page, fetchPokemonGrid]);
 
     return (
         <div>
@@ -35,7 +55,7 @@ function PokegridPage() {
                 <Loader />
             ) : (
                 <div className=" max-w-4xl flex flex-wrap justify-center gap-10">
-                    {pokemons.map((item) => (
+                    {pokemonsFiltered.map((item) => (
                         <PokemonCard key={item.id} pokemon={item} />
                     ))}
                 </div>
@@ -43,7 +63,7 @@ function PokegridPage() {
 
             <Pagination
                 page={page + 1}
-                totalPages={43}
+                totalPages={isFiltering ? totalPages : 43}
                 onPageChange={(newPage: number) => setPage(newPage - 1)}
             />
         </div>

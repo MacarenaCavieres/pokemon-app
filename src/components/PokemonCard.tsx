@@ -4,6 +4,7 @@ import { StarIcon as StarSolid } from "@heroicons/react/24/solid";
 import { useAppStore } from "../stores/useAppStore";
 import { useMemo } from "react";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 type Props = {
     pokemon: Result;
@@ -40,13 +41,15 @@ function PokemonCard({ pokemon }: Props) {
                 )}
             </span>
 
-            <div className="cursor-pointer mt-1 p-2">
-                <img className="w-full" src={pokemon.img} alt={`Pokemon ${pokemon.name}`} />
-                <div className="flex justify-between text-pink-800 py-3 px-4 font-bold text-2xl">
-                    <p>{pokemon.id}</p>
-                    <p>{pokemon.name}</p>
+            <Link to={`/pokedex/${pokemon.id}`}>
+                <div className="cursor-pointer mt-1 p-2">
+                    <img className="w-full" src={pokemon.img} alt={`Pokemon ${pokemon.name}`} />
+                    <div className="flex justify-between text-pink-800 py-3 px-4 font-bold text-2xl">
+                        <p>{pokemon.id}</p>
+                        <p>{pokemon.name}</p>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </article>
     );
 }

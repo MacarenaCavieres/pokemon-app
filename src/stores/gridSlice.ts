@@ -45,17 +45,25 @@ export const createGridSlice: StateCreator<GridType> = (set, get) => ({
     },
     handleFilters: (filters) => {
         set((state) => ({
-            pokemonsFiltered: state.pokemonGroup.filter((item) => {
-                const matchesSearch = filters.search
-                    ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
-                    : true;
-                const matchesFavorites =
-                    filters.favorites === "favorites"
-                        ? state.favoritesPokemons.some((pok) => pok.id === item.id)
-                        : true;
+            pokemonsFiltered:
+                filters.favorites !== "favorites"
+                    ? state.pokemonGroup.filter((item) => {
+                          const matchesSearch = filters.search
+                              ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
+                              : true;
 
-                return matchesSearch && matchesFavorites;
-            }),
+                          return matchesSearch;
+                      })
+                    : filters.favorites === "favorites" && filters.search
+                    ? state.favoritesPokemons.filter((item) => {
+                          const matchesSearch = filters.search
+                              ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
+                              : true;
+                          return matchesSearch;
+                      })
+                    : filters.favorites === "favorites"
+                    ? state.favoritesPokemons
+                    : state.pokemonGroup,
         }));
     },
 });

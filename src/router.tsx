@@ -14,7 +14,7 @@ function AppRouter() {
                     <Route
                         path="/"
                         element={
-                            <Suspense fallback="Cargando...">
+                            <Suspense fallback="Loading...">
                                 <IndexPage />
                             </Suspense>
                         }
@@ -22,15 +22,15 @@ function AppRouter() {
                     <Route
                         path="/pokegrid"
                         element={
-                            <Suspense fallback="Cargando...">
+                            <Suspense fallback="Loading...">
                                 <PokegridPage />
                             </Suspense>
                         }
                     ></Route>
                     <Route
-                        path="/pokedex"
+                        path="/pokedex/:id"
                         element={
-                            <Suspense fallback="Cargando...">
+                            <Suspense fallback="Loading...">
                                 <PokedexPage />
                             </Suspense>
                         }
