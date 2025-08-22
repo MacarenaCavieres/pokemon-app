@@ -33,10 +33,10 @@ function Filters({ handleChange }: Props) {
 
     return (
         <form
-            className="flex justify-center flex-wrap gap-10 my-10 text-lg"
+            className="flex justify-center items-center flex-wrap gap-5 my-10 text-lg flex-col md:flex-row"
             onChange={handleSubmit(handleFilters)}
         >
-            <div className="flex flex-col gap-2 min-w-1/3">
+            <div className="flex flex-col gap-2 md:min-w-1/3 min-w-2/3">
                 <label htmlFor="search">Search by name</label>
                 <input
                     type="text"
@@ -46,7 +46,7 @@ function Filters({ handleChange }: Props) {
                     {...register("search")}
                 />
             </div>
-            <div className="flex flex-col gap-2 min-w-1/3">
+            <div className="flex flex-col gap-2 md:min-w-1/3 min-w-2/3">
                 <label htmlFor="favorites">Search by favorites</label>
                 <select
                     id="favorites"
@@ -60,6 +60,21 @@ function Filters({ handleChange }: Props) {
                     ))}
                 </select>
             </div>
+            {/* <div className="flex gap-3">
+                <button
+                    type="submit"
+                    className="mt-5 px-3 py-1 h-10 w-24 text-center rounded-lg uppercase bg-red-400 cursor-pointer font-bold text-yellow-100"
+                >
+                    Apply
+                </button>
+                <button
+                    type="button"
+                    className="mt-5 px-3 py-1 h-10 w-24 text-center rounded-lg uppercase bg-red-400 cursor-pointer font-bold text-yellow-100"
+                    onClick={() => handleClear()}
+                >
+                    Clear
+                </button>
+            </div> */}
         </form>
     );
 }

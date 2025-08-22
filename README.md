@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+# 🐾 Pokémon App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido a la **Pokémon App**! 🎉  
+Explora, filtra y descubre todos los Pokémon como un verdadero entrenador Pokémon. ¡Prepárate para tu aventura!
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Funcionalidades principales
 
-## Expanding the ESLint configuration
+-   **Lista de Pokémon**: Navega por todos los Pokémon disponibles y explora sus detalles.
+-   **Buscador inteligente**: Filtra por nombre y encuentra tu Pokémon favorito al instante.
+-   **Pokedex**: Visualiza la información completa de cada Pokémon:
+    -   Número
+    -   Nombre
+    -   Tipo(s)
+    -   Imagen
+    -   Peso (WT)
+    -   Altura (HT)
+-   **Navegación fácil**: Vuelve a la lista o la página principal con un solo clic.
+-   **Interfaz amigable**: Diseño limpio, responsivo y con un toque Pokémon.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 Tecnologías usadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+-   **Frontend**: React, TypeScript, Tailwind CSS
+-   **Routing**: React Router
+-   **Estado global**: Zustand
+-   **API**: PokéAPI para obtener datos de Pokémon
+-   **Testing**: React Testing Library & Jest
+-   **Herramientas**: Vite para bundling y optimización
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ⚡ Instalación y uso
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/pokemon-app.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instala dependencias:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+3. Instala dependencias:
+
+```bash
+npm run dev
+```
+
+4. Abre tu navegador en http://localhost:5173
+   y ¡comienza la aventura! 🚀
+
+## 🌟 Vista previa
+
+**Home Page:**  
+Muestra la bienvenida y un botón para comenzar tu viaje Pokémon.
+
+![indexPage](./images/img-1.png)
+
+**Pokegrid:**  
+Detalle completo de cada Pokémon, con su tipo, descripción, altura, peso y más.
+![pokegrid](./images/img-2.png)
+
+**Pokedex:**  
+Encuentra rápidamente a tu Pokémon favorito y navega por toda la lista.
+![pokedex](./images/img-3.png)
+
+---
+
+## 🎉 Créditos
+
+-   Inspirado en la **PokéAPI** 🐱‍👤
+-   Diseñado y desarrollado por [MCavieres](https://www.linkedin.com/in/macarena-cavieres-rubio/)

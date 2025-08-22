@@ -4,12 +4,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 function Header() {
     const { pathname } = useLocation();
     const titlePage = useMemo(
-        () =>
-            pathname === "/"
-                ? "Welcome to the Pokemon App"
-                : pathname === "/pokegrid"
-                ? "Pokemons"
-                : "Pokedex",
+        () => (pathname === "/" ? "Welcome to the Pokemon App" : pathname === "/pokegrid" ? "Pokemons" : ""),
         [pathname]
     );
 
@@ -19,7 +14,10 @@ function Header() {
         <>
             {!isPokedex && (
                 <header className="relative h-96 flex justify-center items-center text-white">
-                    <div className="absolute inset-0 bg-center bg-cover blur-sm bg-[url('./bg-header.jpg')]"></div>
+                    <div
+                        className="absolute inset-0 bg-center bg-cover blur-sm"
+                        style={{ backgroundImage: "url(/bg-header.jpg)" }}
+                    ></div>
                     <div className="absolute inset-0 bg-black/40"></div>
                     <nav className="absolute top-14 right-6 z-20">
                         <NavLink

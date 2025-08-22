@@ -49,11 +49,11 @@ function PokemonCard({ pokemon, currentPage }: Props) {
             >
                 <span className="absolute top-2 right-2 z-10">
                     {isFavorite ? (
-                        <button onClick={addOrRemoveFavorites}>
+                        <button onClick={addOrRemoveFavorites} data-testid="remove-favorite-btn">
                             <StarSolid className="h-8 w-8 text-yellow-400 drop-shadow-md" />
                         </button>
                     ) : (
-                        <button onClick={addOrRemoveFavorites}>
+                        <button onClick={addOrRemoveFavorites} data-testid="favorite-btn">
                             <StarIcon className="h-8 w-8 text-yellow-400 drop-shadow-md" />
                         </button>
                     )}

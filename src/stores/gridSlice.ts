@@ -48,6 +48,7 @@ export const createGridSlice: StateCreator<GridType & RandomPokemonsType, [], []
     },
     handleFilters: (filters) => {
         set((state) => ({
+            isFiltered: true,
             pokemonsFiltered:
                 filters.favorites !== "favorites"
                     ? state.pokemonGroup.filter((item) => {
