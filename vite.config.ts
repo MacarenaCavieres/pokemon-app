@@ -11,4 +11,5 @@ export default defineConfig({
         environment: "jsdom",
         setupFiles: "./src/tests/setup.ts",
     },
+    base: "/pokemon-app/",
 });
