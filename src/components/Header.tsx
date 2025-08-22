@@ -16,7 +16,7 @@ function Header() {
                 <header className="relative h-96 flex justify-center items-center text-white">
                     <div
                         className="absolute inset-0 bg-center bg-cover blur-sm"
-                        style={{ backgroundImage: "url(/bg-header.jpg)" }}
+                        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-header.jpg)` }}
                     ></div>
                     <div className="absolute inset-0 bg-black/40"></div>
                     <nav className="absolute top-14 right-6 z-20">
