@@ -20,7 +20,7 @@ type Props = {
     handleChange: (filters: FilterInputs) => void;
 };
 function Filters({ handleChange }: Props) {
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, reset } = useForm({
         defaultValues: {
             search: "",
             favorites: "",
@@ -31,10 +31,18 @@ function Filters({ handleChange }: Props) {
         handleChange(data);
     };
 
+    const handleClear = () => {
+        handleChange({
+            search: "",
+            favorites: "",
+        });
+        reset();
+    };
+
     return (
         <form
             className="flex justify-center items-center flex-wrap gap-5 my-10 text-lg flex-col md:flex-row"
-            onChange={handleSubmit(handleFilters)}
+            onSubmit={handleSubmit(handleFilters)}
         >
             <div className="flex flex-col gap-2 md:min-w-1/3 min-w-2/3">
                 <label htmlFor="search">Search by name</label>
@@ -60,7 +68,7 @@ function Filters({ handleChange }: Props) {
                     ))}
                 </select>
             </div>
-            {/* <div className="flex gap-3">
+            <div className="flex gap-3">
                 <button
                     type="submit"
                     className="mt-5 px-3 py-1 h-10 w-24 text-center rounded-lg uppercase bg-red-400 cursor-pointer font-bold text-yellow-100"
@@ -74,7 +82,7 @@ function Filters({ handleChange }: Props) {
                 >
                     Clear
                 </button>
-            </div> */}
+            </div>
         </form>
     );
 }

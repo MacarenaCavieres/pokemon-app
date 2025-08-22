@@ -51,3 +51,20 @@ export async function getById(id: string) {
         console.log(error);
     }
 }
+
+export async function getByName(name: string) {
+    try {
+        const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+        const result = Pokemon.safeParse(data);
+        if (result.success) {
+            const restructure = {
+                id: result.data.id.toString(),
+                name: result.data?.name,
+                img: result.data?.sprites.other["official-artwork"].front_default,
+            };
+            return restructure;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

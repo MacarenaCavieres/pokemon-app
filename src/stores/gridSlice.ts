@@ -1,6 +1,6 @@
 import type { StateCreator } from "zustand";
 import type { FilterInputs, Result } from "../types";
-import { getGridPokemon } from "../services/PokesService";
+import { getByName, getGridPokemon } from "../services/PokesService";
 import { type RandomPokemonsType } from "./randomSlice";
 
 const handleStorage = () => {
@@ -46,28 +46,47 @@ export const createGridSlice: StateCreator<GridType & RandomPokemonsType, [], []
 
         localStorage.setItem("favorites", JSON.stringify(get().favoritesPokemons));
     },
-    handleFilters: (filters) => {
-        set((state) => ({
-            isFiltered: true,
-            pokemonsFiltered:
-                filters.favorites !== "favorites"
-                    ? state.pokemonGroup.filter((item) => {
-                          const matchesSearch = filters.search
-                              ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
-                              : true;
+    handleFilters: async (filters) => {
+        if (filters.search && !filters.favorites) {
+            const pokemonByName = await getByName(filters.search.trim().toLowerCase());
+            if (!pokemonByName) {
+                set({ pokemonsFiltered: [] });
+                return;
+            }
+            set({ pokemonsFiltered: [pokemonByName] });
+            return;
+        }
 
-                          return matchesSearch;
-                      })
-                    : filters.favorites === "favorites" && filters.search
-                    ? state.favoritesPokemons.filter((item) => {
-                          const matchesSearch = filters.search
-                              ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
-                              : true;
-                          return matchesSearch;
-                      })
-                    : filters.favorites === "favorites"
-                    ? state.favoritesPokemons
-                    : state.pokemonGroup,
-        }));
+        if (filters.favorites === "favorites" && filters.search) {
+            console.log("entra");
+            set((state) => ({
+                pokemonsFiltered: state.favoritesPokemons.filter((item) => {
+                    const matchesSearch = filters.search
+                        ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
+                        : true;
+                    return matchesSearch;
+                }),
+            }));
+            return;
+        }
+
+        if (filters.favorites === "favorites") {
+            set((state) => ({
+                pokemonsFiltered: state.favoritesPokemons,
+            }));
+            return;
+        }
+
+        if (filters.favorites !== "favorites") {
+            set((state) => ({
+                pokemonsFiltered: state.pokemonGroup.filter((item) => {
+                    const matchesSearch = filters.search
+                        ? item.name.toLowerCase().includes(filters.search.toLowerCase().trim())
+                        : true;
+
+                    return matchesSearch;
+                }),
+            }));
+        }
     },
 });
